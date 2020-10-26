@@ -4,6 +4,8 @@ ENV USER l4d2
 ENV HOME /home/$USER
 ENV SERVER $HOME/hlserver
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get -y update \
     && apt-get --no-install-recommends -y install lib32gcc1 curl net-tools lib32stdc++6 locales unzip lib32z1 screen \
     && locale-gen en_US.UTF-8 \
