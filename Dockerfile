@@ -37,7 +37,7 @@ RUN curl --silent --show-error https://mms.alliedmods.net/mmsdrop/1.10/mmsource-
 
 RUN curl --silent --show-error https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6498-linux.tar.gz | tar xvz -C $SERVER/l4d2/left4dead2
 
-RUN curl --silent --show-error --output --location $HOME/tmp.zip https://github.com/SirPlease/L4D2-Competitive-Rework/archive/master.zip \
+RUN curl --silent --show-error --location --output $HOME/tmp.zip https://github.com/SirPlease/L4D2-Competitive-Rework/archive/master.zip \
     && unzip -v $HOME/tmp.zip -d $SERVER/l4d2/left4dead2 \
     && rm $HOME/tmp.zip
 
