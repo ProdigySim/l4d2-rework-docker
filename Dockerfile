@@ -12,26 +12,26 @@ RUN apt-get -y update \
     && locale-gen en_US.UTF-8 \
     && update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && dpkg-reconfigure --frontend noninteractive locales \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && useradd $USER \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN useradd $USER \
     && mkdir $HOME \
     && chown $USER:$USER $HOME \
-    && mkdir $SERVER
+    && mkdir $SERVER \
+    && chown --recursive $USER:$USER $SERVER
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
+USER $USER
+
 ADD ./l4d2_ds.txt $SERVER/l4d2_ds.txt
 ADD ./update.sh $SERVER/update.sh
 ADD ./l4d2.sh $SERVER/l4d2.sh
 
-RUN chown -R $USER:$USER $SERVER
-
-USER $USER
 RUN curl http://media.steampowered.com/client/steamcmd_linux.tar.gz | tar -C $SERVER -xvz \
     && $SERVER/update.sh
-
 
 RUN curl https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz | tar xvz -C $SERVER/l4d2/left4dead2
 
