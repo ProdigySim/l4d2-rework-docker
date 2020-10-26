@@ -5,6 +5,7 @@ ENV HOME /home/$USER
 ENV SERVER $HOME/hlserver
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 RUN apt-get -y update \
     && apt-get --no-install-recommends -y install lib32gcc1 curl net-tools lib32stdc++6 locales unzip lib32z1 screen \
