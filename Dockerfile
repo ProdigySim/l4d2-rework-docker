@@ -23,9 +23,9 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 RUN mkdir $SERVER
-ADD ./l4d2_ds.txt $SERVER/l4d2_ds.txt
-ADD ./update.sh $SERVER/update.sh
-ADD ./l4d2.sh $SERVER/l4d2.sh
+COPY ./l4d2_ds.txt $SERVER/l4d2_ds.txt
+COPY ./update.sh $SERVER/update.sh
+COPY ./l4d2.sh $SERVER/l4d2.sh
 RUN curl --silent --show-error http://media.steampowered.com/client/steamcmd_linux.tar.gz | tar -C $SERVER -xvz \
     && $SERVER/update.sh
 RUN curl --silent --show-error https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz | tar xvz -C $SERVER/l4d2/left4dead2
