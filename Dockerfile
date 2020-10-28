@@ -14,23 +14,20 @@ RUN apt-get -y update \
     && dpkg-reconfigure --frontend noninteractive locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-
 RUN useradd --create-home $USER
 
 USER $USER
 
-RUN mkdir $SERVER
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
 
+RUN mkdir $SERVER
 ADD ./l4d2_ds.txt $SERVER/l4d2_ds.txt
 ADD ./update.sh $SERVER/update.sh
 ADD ./l4d2.sh $SERVER/l4d2.sh
-
 RUN curl --silent --show-error http://media.steampowered.com/client/steamcmd_linux.tar.gz | tar -C $SERVER -xvz \
     && $SERVER/update.sh
-
 RUN curl --silent --show-error https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz | tar xvz -C $SERVER/l4d2/left4dead2
 RUN curl --silent --show-error https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6498-linux.tar.gz | tar xvz -C $SERVER/l4d2/left4dead2
 RUN curl --silent --show-error --location --output $HOME/tmp.zip https://github.com/SirPlease/L4D2-Competitive-Rework/archive/master.zip \
