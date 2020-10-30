@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 RUN apt-get -y update \
-    && apt-get --no-install-recommends -y install lib32gcc1 curl net-tools lib32stdc++6 locales unzip lib32z1 screen \
+    && apt-get -y install lib32gcc1 curl net-tools lib32stdc++6 locales unzip lib32z1 screen \
     && locale-gen en_US.UTF-8 \
     && update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && dpkg-reconfigure --frontend noninteractive locales \
